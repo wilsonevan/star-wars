@@ -1,0 +1,50 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit !important;
+}
+
+body {
+  box-sizing: border-box !important;
+  font-family: "Star Jedi" !important;
+  letter-spacing: 1.25px !important;
+  font-weight: 300 !important;
+  color: white !important;
+  background: black !important;
+}
+
+h1 {
+  font-family: "Star Jedi" !important;
+  letter-spacing: 1.25px !important;
+  font-weight: 300 !important;
+  color: #ffd700 !important;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+div,
+button,
+a,
+input,
+select,
+textarea {
+  font-family: "Star Jedi Solid" !important;
+  font-weight: 300 !important;
+  letter-spacing: 1.25px !important;
+}
+
+@font-face {
+  font-family: "Star Jedi";
+  src: local("Star Jedi"),
+    url("../fonts/star_jedi/Starjhol.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Star Jedi Solid";
+  src: local("Star Jedi Solid"),
+    url("../fonts/star_jedi/Starjedi.woff") format("woff");
+}

@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Dimmer, Loader } from "semantic-ui-react";
+import "../fonts/Fonts.css";
 
 const People = () => {
   const [people, setPeople] = useState([]);
@@ -12,7 +13,7 @@ const People = () => {
   useEffect(() => {
     // Get all of the people, and set their data
     axios.get("https://swapi.co/api/people/").then(res => {
-      setPeople(res.data.results)
+      setPeople(res.data.results);
       // const characters = res.data.results.map(person => {
       //   return axios.get(person.homeworld).then(res => {
       //     // return [
@@ -56,15 +57,15 @@ const People = () => {
   };
 
   // Find the ID from the planet URI, so it can be used for routing purposes
-  const getHomeworldId = (homeworld) => {
+  const getHomeworldId = homeworld => {
     let id = homeworld.split("");
 
     id = id.map(char => {
       return char.replace(/[^0-9]/, "");
     });
 
-    return id = id.join("");
-  }
+    return (id = id.join(""));
+  };
 
   const addNewPlanet = planetURI => {
     axios.get(planetURI).then(res => {
@@ -74,16 +75,20 @@ const People = () => {
   };
   return (
     <>
+      <PeopleHeader>Characters</PeopleHeader>
       {people.length > 0 ? (
         <PeopleList>
           {people.map((person, index) => {
             return (
-                <Person>
-                  <Link to={`/planets/${getHomeworldId(person.homeworld)}`}>
-                    <Name>{person.name}</Name>
-                  </Link>{" "}
-                  - <Link>{person.homeworldName}</Link>
-                </Person>
+              <Person>
+                <Link to={`/planets/${getHomeworldId(person.homeworld)}`}>
+                  <Name>{person.name}</Name>
+                </Link>{" "}
+                -{" "}
+                <Link>
+                  <Planet>{person.homeworldName}</Planet>
+                </Link>
+              </Person>
             );
           })}
         </PeopleList>
@@ -96,21 +101,31 @@ const People = () => {
   );
 };
 
+const PeopleHeader = styled.h1`
+  text-align: center;
+  font-size: 3rem;
+  letter-spacing: 2rem !important;
+`
+
 const PeopleList = styled.div`
   margin: 0px;
   padding: 0px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
-`
-
-const Person = styled.div`
-  padding: 10px;
-  
 `;
 
-const Name = styled.div`
-`
+const Person = styled.div`
+  padding: 5px;
+`;
+
+const Name = styled.h2`
+  font-size: 1.5rem;
+  color: #ffd700;
+  font-family: "Star Jedi Solid" !important;
+`;
+
+const Planet = styled.h2``;
 
 export default People;

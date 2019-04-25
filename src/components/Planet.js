@@ -3,7 +3,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Dimmer, Loader } from "semantic-ui-react";
 import styled from "styled-components";
-
+import "../fonts/Fonts.css";
+import { Link } from "react-router-dom";
 
 const Planet = () => {
   const [planet, setPlanet] = useState("");
@@ -27,9 +28,11 @@ const Planet = () => {
 
   return (
     <>
+      <Link to="/people">
+        <BackButton>Go Back</BackButton>
+      </Link>
       {planet.name ? (
         <PageContainer>
-          
           <PlanetContainer>
             <PlanetCircle inputWidth={getPlanetDiameter(planet.diameter)}>
               {Object.entries(planet).map((item, index) => {
@@ -92,12 +95,8 @@ const PlanetCircle = styled.div`
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-evenly;
   padding: 50px;
-`;
-
-const PlanetData = styled.div`
-  text-align: center;
 `;
 
 const Data = styled.h2`
@@ -105,6 +104,20 @@ const Data = styled.h2`
   margin: 0px;
 `;
 
-
+const BackButton = styled.button`
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  padding: 20px 20px 20px 20px;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #ffd700;
+  border-top: 1px solid #ffd700;
+  border-bottom: 1px solid #ffd700;
+  border-left: 0px;
+  border-right: 0px;
+  font-family: "Star Jedi Solid" !important;
+  font-size: 1rem;
+  letter-spacing: 1rem !important;
+`;
 
 export default Planet;
