@@ -75,22 +75,20 @@ const People = () => {
   return (
     <>
       {people.length > 0 ? (
-        <ul>
+        <PeopleList>
           {people.map((person, index) => {
             return (
-              <li>
-                <Item>
+                <Person>
                   <Link to={`/planets/${getHomeworldId(person.homeworld)}`}>
-                    {person.name}
+                    <Name>{person.name}</Name>
                   </Link>{" "}
                   - <Link>{person.homeworldName}</Link>
-                </Item>
-              </li>
+                </Person>
             );
           })}
-        </ul>
+        </PeopleList>
       ) : (
-        <Dimmer active inverted>
+        <Dimmer active>
           <Loader />
         </Dimmer>
       )}
@@ -98,11 +96,21 @@ const People = () => {
   );
 };
 
-const Item = styled.div`
+const PeopleList = styled.div`
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+`
+
+const Person = styled.div`
   padding: 10px;
-  // display: flex;
-  // flex-direction: row;
-  // justify-content: flex-start;
+  
 `;
+
+const Name = styled.div`
+`
 
 export default People;

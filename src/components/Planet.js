@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Dimmer, Loader } from "semantic-ui-react";
 import styled from "styled-components";
-import Particles from "react-particles-js";
+
 
 const Planet = () => {
   const [planet, setPlanet] = useState("");
@@ -15,46 +15,49 @@ const Planet = () => {
     });
   });
 
-  const getPlanetDiameter = () => {
-    
-  }
+  const getPlanetDiameter = planetDiameter => {
+    const planetScaler = 200000;
+    const diameter = parseInt(planetDiameter);
+    const wWidth = window.innerWidth;
+
+    // Calculate the proportional diameter
+    const newDiameter = (wWidth / 2) * (diameter / planetScaler);
+    return newDiameter;
+  };
 
   return (
     <>
       {planet.name ? (
         <PageContainer>
-          <Particles params={particleParams} style={particleStyles} />
+          
           <PlanetContainer>
             <PlanetCircle inputWidth={getPlanetDiameter(planet.diameter)}>
-              <PlanetData>
-                {Object.entries(planet).map((item, index) => {
-                  // Format Titles
-                  let title = item[0];
-                  let value = item[1];
-                  title = title.split("_");
+              {Object.entries(planet).map((item, index) => {
+                // Format Titles
+                let title = item[0];
+                let value = item[1];
+                title = title.split("_");
 
-                  title = title.map(word => {
-                    const capWord =
-                      word.charAt(0).toUpperCase() + word.slice(1);
-                    return capWord;
-                  });
+                title = title.map(word => {
+                  const capWord = word.charAt(0).toUpperCase() + word.slice(1);
+                  return capWord;
+                });
 
-                  title = title.join("_").replace("_", " ");
+                title = title.join("_").replace("_", " ");
 
-                  if (title === "Name") return <PlanetName>{value}</PlanetName>;
-                  else if (index < 9)
-                    return (
-                      <Data>
-                        {title} - {value}
-                      </Data>
-                    );
-                })}
-              </PlanetData>
+                if (title === "Name") return <PlanetName>{value}</PlanetName>;
+                else if (index < 9)
+                  return (
+                    <Data>
+                      {title} - {value}
+                    </Data>
+                  );
+              })}
             </PlanetCircle>
           </PlanetContainer>
         </PageContainer>
       ) : (
-        <Dimmer active inverted>
+        <Dimmer active>
           <Loader />
         </Dimmer>
       )}
@@ -90,68 +93,18 @@ const PlanetCircle = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  padding: 50px;
 `;
 
 const PlanetData = styled.div`
   text-align: center;
 `;
 
-const Data = styled.h2``;
+const Data = styled.h2`
+  text-align: center;
+  margin: 0px;
+`;
 
-const particleStyles = {
-  width: "100vh",
-  height: "100vh",
-  position: "absolute",
-  zIndex: "-100",
-  backgroundColor: "black"
-  // backgroundImage: `url(${logo})`
-};
 
-const particleParams = {
-  particles: {
-    number: {
-      value: 80,
-      density: {
-        enable: true,
-        value_area: 800
-      }
-    },
-    color: {
-      value: "#ffffff"
-    },
-    shape: {
-      type: "circle",
-      stroke: {
-        width: 0,
-        color: "#000000"
-      },
-      polygon: {
-        nb_sides: 5
-      },
-      image: {
-        src: "img/github.svg",
-        width: 100,
-        height: 100
-      }
-    },
-    line_linked: {
-      enable: false
-    },
-    move: {
-      enable: true,
-      speed: 2,
-      direction: "none",
-      random: false,
-      straight: false,
-      out_mode: "out",
-      bounce: false,
-      attract: {
-        enable: false,
-        rotateX: 600,
-        rotateY: 1200
-      }
-    }
-  }
-};
 
 export default Planet;
