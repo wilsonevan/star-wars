@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Switch, Route } from "react-router-dom";
+import styled from "styled-components";
+import People from "./components/People";
+import Home from "./components/Home";
+import Planet from "./components/Planet";
+import NoMatch from "./components/NoMatch";
 
-function App() {
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <PageContainer>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/planets/:id" component={Planet} />
+        <Route exact path="/people" component={People} />
+        <Route component={NoMatch} />
+      </Switch>
+    </PageContainer>
   );
-}
+};
+
+const PageContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 export default App;
