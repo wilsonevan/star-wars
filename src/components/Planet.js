@@ -17,7 +17,7 @@ const Planet = () => {
   });
 
   const getPlanetDiameter = planetDiameter => {
-    const planetScaler = 200000;
+    const planetScaler = 130000;
     const diameter = parseInt(planetDiameter);
     const wWidth = window.innerWidth;
 
@@ -52,7 +52,8 @@ const Planet = () => {
                 else if (index < 9)
                   return (
                     <Data>
-                      {title} - {value}
+                      <Title>{title}:</Title>
+                      <Value>{" "}{value}</Value>
                     </Data>
                   );
               })}
@@ -80,14 +81,16 @@ const PlanetContainer = styled.div`
 
 const PlanetName = styled.h1`
   text-align: center;
+  font-size: 3rem;
+  letter-spacing: 2rem !important;
 `;
 
 const PlanetCircle = styled.div`
   height: ${props => props.inputWidth || 50}rem;
   width: ${props => props.inputWidth || 50}rem;
   border-radius: 50%;
-  border: 1px solid black;
-  background-color: white;
+  border: 4px solid white;
+  background-color: rgba(255, 255, 255, 0.2);
   margin: 0;
   position: absolute;
   top: 50%;
@@ -99,10 +102,28 @@ const PlanetCircle = styled.div`
   padding: 50px;
 `;
 
-const Data = styled.h2`
-  text-align: center;
+const Data = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   margin: 0px;
+  color: black;
 `;
+
+const Title = styled.h2`
+  margin: 0px;
+  padding: 5px;
+  font-size: 1.5rem;
+  color: #ffd700;
+  font-family: "Star Jedi Solid" !important;
+`
+
+const Value = styled.h2`
+  margin: 0px;
+  padding: 5px;
+  color: white;
+`
 
 const BackButton = styled.button`
   position: absolute;

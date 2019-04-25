@@ -105,7 +105,7 @@ const PeopleHeader = styled.h1`
   text-align: center;
   font-size: 3rem;
   letter-spacing: 2rem !important;
-`
+`;
 
 const PeopleList = styled.div`
   margin: 0px;
